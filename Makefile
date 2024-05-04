@@ -1,4 +1,4 @@
-PRG=gnu.exe
+PRG=bogo.exe
 
 GCC=gcc
 FLAGS=-O2 -Wall -Wextra
@@ -9,4 +9,4 @@ DRIVER=src/main.c
 gcc:
 	$(GCC) -o $(PRG) $(DRIVER) $(SOURCE) $(FLAGS)
 clean:
-	rm -f *gcno *gcda *gcov *.exe *.o *.obj *.tds
+	rm -f *.exe
