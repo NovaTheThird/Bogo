@@ -15,6 +15,7 @@
 
 #include "bogo.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <time.h>
 
 //-----------------------------------------------------------------------------
@@ -85,8 +86,8 @@ void Sort(Bogo* bogo)
 void Dump(Bogo* bogo)
 {
   char buff[20];
-  printf("Array size: %d", bogo->size);
-  strftime(buff, 20, "Time to sort: %H:%M:%S", localtime(&bogo->timeElapsed));
+  printf("Array size: %d\n", bogo->size);
+  strftime(buff, 20, "Time to sort: %H:%M:%S\n", localtime(&bogo->timeElapsed));
 }
 
 //-----------------------------------------------------------------------------
@@ -95,7 +96,7 @@ void Dump(Bogo* bogo)
 
 int IsSorted(Bogo* bogo)
 {
-  for (int i = 1; i < bogo->size; ++i)
+  for (unsigned i = 1; i < bogo->size; ++i)
   {
     if (bogo->array[i - 1] > bogo->array[i])
     {
