@@ -56,6 +56,8 @@ Bogo* CreateBogo(unsigned size)
     bogo->array[i] = i + 1;
   }
 
+  Shuffle(bogo);
+
   return bogo;
 }
 
@@ -78,6 +80,13 @@ void Sort(Bogo* bogo)
   bogo->timeElapsed = bogo->timeEnd - bogo->timeBegin;
 
   return; 
+}
+
+void Dump(Bogo* bogo)
+{
+  char buff[20];
+  printf("Array size: %d", bogo->size);
+  strftime(buff, 20, "Time to sort: %H:%M:%S", localtime(&bogo->timeElapsed));
 }
 
 //-----------------------------------------------------------------------------
