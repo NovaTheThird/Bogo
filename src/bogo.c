@@ -68,6 +68,16 @@ void FreeBogo(Bogo* bogo)
 void Sort(Bogo* bogo)
 {
   bogo->timeBegin = time(NULL);
+
+  while (!IsSorted(bogo))
+  {
+    Shuffle(bogo);
+  }
+
+  bogo->timeEnd = time(NULL);
+  bogo->timeElapsed = bogo->timeEnd - bogo->timeBegin;
+
+  return; 
 }
 
 //-----------------------------------------------------------------------------
@@ -76,7 +86,15 @@ void Sort(Bogo* bogo)
 
 int IsSorted(Bogo* bogo)
 {
-  return 0;
+  for (int i = 1; i < bogo->size; ++i)
+  {
+    if (bogo->array[i - 1] > bogo->array[i])
+    {
+      return 0;
+    }
+  }
+
+  return 1;
 }
 
 void Shuffle(Bogo* bogo)

@@ -41,3 +41,4 @@ typedef struct Bogo Bogo;
 Bogo* CreateBogo(unsigned size);
 void FreeBogo(Bogo* bogo);
 void Sort(Bogo* bogo);
+void Dump(Bogo* bogo);
