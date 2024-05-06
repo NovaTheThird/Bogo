@@ -42,14 +42,20 @@ int main(int argc, char* argv[])
 
     return 0;
   }
-
-  unsigned size = 0;
-
-  if (strcmp(argv[1], "-s") == 0)
+  else if (strcmp(argv[1], "-s") == 0)
   {
     if (argv[2])
     {
-      size = atoi(argv[2]);
+      int size = atoi(argv[2]);
+
+      Bogo* bogo = CreateBogo(size);
+
+      Sort(bogo);
+      Dump(bogo);
+
+      FreeBogo(bogo);
+
+      return 0;
     }
     else
     {
@@ -57,11 +63,9 @@ int main(int argc, char* argv[])
       return -1;
     }
   }
-
-  Bogo* bogo = CreateBogo(size);
-
-  Sort(bogo);
-  Dump(bogo);
-
-  return 0;
+  else
+  {
+    printf("Invalid arguments\n");
+    return -1;
+  }
 }

@@ -24,9 +24,8 @@
 
 typedef struct Bogo 
 {
-  time_t timeBegin;
-  time_t timeEnd;
-  time_t timeElapsed;
+  clock_t begin, end;
+  double elapsed;
 
   unsigned size;
   int *array;
@@ -64,30 +63,44 @@ Bogo* CreateBogo(unsigned size)
 
 void FreeBogo(Bogo* bogo)
 {
+  free(bogo->array);
   free(bogo);
   bogo = NULL;
 }
 
 void Sort(Bogo* bogo)
 {
-  bogo->timeBegin = time(NULL);
+  bogo->begin = clock();
 
   while (!IsSorted(bogo))
   {
+    #ifdef _DEBUG
+      for (unsigned i = 0; i < bogo->size; ++i)
+      {
+        printf("%d ", bogo->array[i]);
+      }
+      printf("\n");
+    #endif
+
     Shuffle(bogo);
   }
 
-  bogo->timeEnd = time(NULL);
-  bogo->timeElapsed = bogo->timeEnd - bogo->timeBegin;
+  bogo->end = clock();
+  bogo->elapsed = (bogo->end - bogo->begin) / CLOCKS_PER_SEC;
 
   return; 
 }
 
 void Dump(Bogo* bogo)
 {
-  char buff[20];
-  printf("Array size: %d\n", bogo->size);
-  strftime(buff, 20, "Time to sort: %H:%M:%S\n", localtime(&bogo->timeElapsed));
+  printf("Array size:   %d\n", bogo->size);
+  printf("Time Elapsed: %f\n", bogo->elapsed);
+  
+  for (unsigned i = 0; i < bogo->size; ++i)
+  {
+    printf("%d ", bogo->array[i]);
+  }
+  printf("\n");
 }
 
 //-----------------------------------------------------------------------------
