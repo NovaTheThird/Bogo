@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 {
   if (argc < 2)
   {
-    printf("Invalid argument count\n");
+    printf("Invalid argument count. Launch with '-h' for help\n");
     return -1;
   }
 
@@ -35,10 +35,12 @@ int main(int argc, char* argv[])
     printf("compile time: %s\n", __TIME__);
     printf("compile date: %s\n", __DATE__);
     printf("==============================\n");
-    printf("bogo [argument]\n");
-    printf("arguments:\n");
-    printf("  -h  -  lists help (here)\n");
-    printf("  -s  -  an integer that is the size of the array\n");
+    printf("bogo [argument] [flags]\n");
+    printf("\narguments:\n");
+    printf("  -h        -  lists help (here)\n");
+    printf("  -s [size] -  an integer that is the size of the array\n");
+    printf("\nflags:\n");
+    printf("  -p      -  actively prints the array, use after indicating size\n");
 
     return 0;
   }
@@ -49,6 +51,14 @@ int main(int argc, char* argv[])
       int size = atoi(argv[2]);
 
       Bogo* bogo = CreateBogo(size);
+
+      if (argv[3])
+      {
+        if (strcmp(argv[3], "-p") == 0)
+        {
+          SetPrint(bogo, 1);
+        }
+      }
 
       Sort(bogo);
       Dump(bogo);

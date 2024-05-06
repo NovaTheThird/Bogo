@@ -26,8 +26,6 @@ typedef struct Bogo Bogo;
 // Public Constants:
 //-----------------------------------------------------------------------------
 
-#define _DEBUG 0
-
 //-----------------------------------------------------------------------------
 // Public Structures:
 //-----------------------------------------------------------------------------
@@ -42,5 +40,7 @@ typedef struct Bogo Bogo;
 
 Bogo* CreateBogo(unsigned size);
 void FreeBogo(Bogo* bogo);
+void SetPrint(Bogo* bogo, int newPrint);
+int GetPrint(Bogo* bogo);
 void Sort(Bogo* bogo);
 void Dump(Bogo* bogo);

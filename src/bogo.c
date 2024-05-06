@@ -29,6 +29,8 @@ typedef struct Bogo
 
   unsigned size;
   int *array;
+
+  int print;
 }Bogo;
 
 //-----------------------------------------------------------------------------
@@ -50,6 +52,7 @@ Bogo* CreateBogo(unsigned size)
   // Set array values
   bogo->size = size;
   bogo->array = calloc(size, sizeof(int));
+  bogo->print = 0;
 
   for (unsigned i = 0; i < size; ++i)
   {
@@ -68,19 +71,31 @@ void FreeBogo(Bogo* bogo)
   bogo = NULL;
 }
 
+void SetPrint(Bogo* bogo, int newPrint)
+{
+  bogo->print = newPrint;
+}
+
+int GetPrint(Bogo* bogo)
+{
+  return bogo->print;
+}
+
 void Sort(Bogo* bogo)
 {
   bogo->begin = clock();
 
   while (!IsSorted(bogo))
   {
-    #ifdef _DEBUG
+    if (bogo->print)
+    {
+      printf("Array: ");
       for (unsigned i = 0; i < bogo->size; ++i)
       {
         printf("%d ", bogo->array[i]);
       }
       printf("\n");
-    #endif
+    }
 
     Shuffle(bogo);
   }
